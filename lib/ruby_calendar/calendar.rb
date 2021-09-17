@@ -3,6 +3,7 @@ module RubyCalendar
     attr_accessor :firstweekday
 
     WEEK_DAY_NAME = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday].freeze
+    MONTH_NAMES = %w[January February March April May June July August September October November December].freeze
 
     def initialize
       @firstweekday = 0
@@ -31,15 +32,36 @@ module RubyCalendar
       w = [2, w].max
       l = [1, l].max
       c = [2, c].max
-      colwidth = (w + 1) * 7 - 1
+      colwidth = 7*(w+1)-1
       a = []
       a.push(year.to_s.center(colwidth*m+c*(m-1)).rstrip)
       a.push("\n"*l)
       header = format_week_header(w)
-      
+      MONTH_NAMES.each_slice(m).to_a.each do |months|
+        a.push(months.map{|month| format_month_name(year, month_to_i(month), colwidth, false) << (' '*c)}.join.rstrip)
+        a.push("\n"*l)
+        a.push(months.map{format_week_header(w) << (' '*c)}.join.rstrip)
+        a.push("\n"*l)
+        month_array = months.map{|month| month_days_calendar(year, month_to_i(month))}
+        slice_month_array = month_array.map{|array| array.each_slice(7).to_a}
+        max_element_count = slice_month_array.map{|array| array.length}.max - 1
+        replace_array = []
+        for num in 0..max_element_count do
+          replace_array.push(slice_month_array.map {|array| array[num].nil? ? [] : array[num]})
+        end
+        replace_array.each do |weeks|
+          a.push(weeks.map{|week| format_week_name(week, w) << (' '*c)}.join.rstrip)
+          a.push("\n"*l)
+        end
+      end
+      a
     end
 
     private
+
+    def month_to_i(month)
+      MONTH_NAMES.index(month)+1
+    end
 
     def localized_day(format)
       days = []
@@ -54,8 +76,12 @@ module RubyCalendar
       s.center(width)
     end
 
-    def format_month_name(year, month, width)
-      Date.new(year, month).strftime("%B #{year}").center(width)
+    def format_month_name(year, month, width, withyear=true)
+      if withyear
+        Date.new(year, month).strftime("%B #{year}").center(width)
+      else
+        Date.new(year, month).strftime("%B").center(width)
+      end
     end
 
     def format_week_header(width)
@@ -74,13 +100,20 @@ module RubyCalendar
     def month_days_calendar(year, month)
       firstday_wday = (Date.new(year, month, 1).wday - @firstweekday) % 7
       lastday_date = Date.new(year, month, -1).day
+      lastday_wday = (6 + @firstweekday - Date.new(year, month, -1).wday) % 7
 
       days = Array.new(firstday_wday){0}
       days.push(*1..lastday_date)
+      lastday_wday.times{ days.push(0) }
+      days
     end
 
     def format_week_name(week, width)
-      week.map{|day| format_day(day, width)}.join(' ')
+      if week.empty?
+        Array.new(7){0}.map{|day| format_day(day, width)}.join(' ')
+      else
+        week.map{|day| format_day(day, width)}.join(' ')
+      end
     end
   end
 end
