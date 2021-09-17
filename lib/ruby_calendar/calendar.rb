@@ -27,7 +27,7 @@ module RubyCalendar
       s
     end
 
-    def format_year(year, w=2, l=1, c=6, m=3)
+    def calendar(year, w=2, l=1, c=6, m=3)
       w = [2, w].max
       l = [1, l].max
       c = [2, c].max
@@ -36,8 +36,7 @@ module RubyCalendar
       a.push(year.to_s.center(colwidth*m+c*(m-1)).rstrip)
       a.push("\n"*l)
       header = format_week_header(w)
-
-      a
+      
     end
 
     private
