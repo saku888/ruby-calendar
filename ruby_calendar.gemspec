@@ -5,20 +5,19 @@ require_relative "lib/ruby_calendar/version"
 Gem::Specification.new do |spec|
   spec.name          = "ruby_calendar"
   spec.version       = RubyCalendar::VERSION
-  spec.authors       = ["sakura888"]
+  spec.authors       = ["saku888"]
   spec.email         = ["sakura.orn888@gmail.com"]
 
   spec.summary       = %q{This is a calender of gem}
   spec.description   = %q{This gem produces a calendar output similar to the Unix cal program}
-  spec.homepage      = "https://github.com/sakura888/ruby_calendar"
+  spec.homepage      = "https://github.com/saku888/ruby-calendar"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
-
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/sakura888/ruby_calendar"
-  spec.metadata["changelog_uri"] = "https://github.com/sakura888/calender/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/saku888/ruby-calendar"
+  spec.metadata["changelog_uri"] = "https://github.com/saku888/ruby-calendar/blob/master/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
