@@ -12,7 +12,7 @@ module RubyCalendar
       @firstweekday = firstweekday
     end
 
-    def format_month(year, month, w=0, l=0)
+    def month(year, month, w=0, l=0)
       w = [2, w].max
       l = [1, l].max
       s = format_month_name(year, month, 7*(w+1)-1)
@@ -25,6 +25,19 @@ module RubyCalendar
         s += "\n" * l
       end
       s
+    end
+
+    def format_year(year, w=2, l=1, c=6, m=3)
+      w = [2, w].max
+      l = [1, l].max
+      c = [2, c].max
+      colwidth = (w + 1) * 7 - 1
+      a = []
+      a.push(year.to_s.center(colwidth*m+c*(m-1)).rstrip)
+      a.push("\n"*l)
+      header = format_week_header(w)
+
+      a
     end
 
     private

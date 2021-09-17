@@ -18,7 +18,7 @@ $ gem install ruby_calendar
 
 ```ruby
 calendar = RubyCalendar::Calendar.new
-puts calendar.format_month(2021,1)
+puts calendar.month(2021,1)
 #     January 2021
 # Su Mo Tu We Th Fr Sa
 #                 1  2
@@ -32,7 +32,7 @@ puts calendar.format_month(2021,1)
 
 ## Calendar class methods
 
-### format_month(year, month, w=0, l=0)
+### month(year, month, w=0, l=0)
 
 Return a month’s calendar in a multi-line string.
 * w: it specifies the width of the date columns which are centered(default: 0).
@@ -49,7 +49,7 @@ calendar = RubyCalendar::Calendar.new
 # => #<RubyCalendar::Calendar:0x00007fd334b9c0d0 @firstweekday=0>
 
 calendar.set_firstweekday(1) # set the first day of the week to Monday
-puts calendar.format_month(2021,1)
+puts calendar.month(2021,1)
 #     January 2021
 # Mo Tu We Th Fr Sa Su
 #              1  2  3
