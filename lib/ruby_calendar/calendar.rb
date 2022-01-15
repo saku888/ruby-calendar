@@ -3,8 +3,8 @@ require 'ruby_calendar/year'
 
 module RubyCalendar
   class Calendar
-    include Month
-    include Year
+    include RubyCalendar::Month
+    include RubyCalendar::Year
 
     attr_accessor :firstweekday
 
