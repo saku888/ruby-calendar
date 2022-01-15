@@ -17,8 +17,8 @@ $ gem install ruby_calendar
 * Output calendars
 
 ```ruby
-calendar = RubyCalendar::Calendar.new
-puts calendar.month(2021,1)
+calendar = RubyCalendar::Calendar.new(2021, 1)
+puts calendar.month
 #     January 2021
 # Su Mo Tu We Th Fr Sa
 #                 1  2
@@ -30,35 +30,66 @@ puts calendar.month(2021,1)
 # => nil
 ```
 
-## Calendar class methods
+## Setting calendar methods
 
-### month(year, month, w=0, l=0)
+### set_year()
 
-Return a month’s calendar in a multi-line string.
-* w: it specifies the width of the date columns which are centered(default: 0).
-* l: it specifies the number of lines that each week will use(default: 0).
+It specifies the year for which the calendar is displayed (default: 2021).
+Change by giving a number to the argument.
+
+ex) 2021 -> 2022.
+```ruby
+calendar = RubyCalendar::Calendar.new(2021, 1)
+# => #<RubyCalendar::Calendar:0x00007f9a58161788 @year=2021, @month=1, @firstweekday=0>
+calendar.set_year(2022)
+# => #<RubyCalendar::Calendar:0x00007f9a58161788 @year=2022, @month=1, @firstweekday=0>
+```
+
+### set_month()
+
+It specifies the month to display(month method) the monthly calendar(default: January).
+Change by giving a number to the argument.
+
+ex) 1(January) -> 1(December).
+```ruby
+calendar = RubyCalendar::Calendar.new(2021, 1)
+# => #<RubyCalendar::Calendar:0x00007f9a58161788 @year=2021, @month=1, @firstweekday=0>
+calendar.set_month(12)
+# => #<RubyCalendar::Calendar:0x00007f9a58149598 @year=2021, @month=12, @firstweekday=0>
+```
 
 ### set_firstweekday()
 
+It specifies the beginning of the week(default: Sunday).
+Change by giving a number to the argument.
 
-* it set the first day of the week to Monday(1) or to any other weekday.
-
+ex) 0(Sunday) -> 1(Monday).
 ```ruby
-# at initialization 0(Sunday).
-calendar = RubyCalendar::Calendar.new
-# => #<RubyCalendar::Calendar:0x00007fd334b9c0d0 @firstweekday=0>
-
-calendar.set_firstweekday(1) # set the first day of the week to Monday
-puts calendar.month(2021,1)
-#     January 2021
-# Mo Tu We Th Fr Sa Su
-#              1  2  3
-#  4  5  6  7  8  9 10
-# 11 12 13 14 15 16 17
-# 18 19 20 21 22 23 24
-# 25 26 27 28 29 30 31
-=> nil
+calendar = RubyCalendar::Calendar.new(2021, 1)
+# => #<RubyCalendar::Calendar:0x00007f9a58132460 @year=2021, @month=1, @firstweekday=0>
+calendar.set_firstweekday(1)
+# => #<RubyCalendar::Calendar:0x00007f9a58132460 @year=2021, @month=1, @firstweekday=1>
 ```
+
+## Output calendar methods
+
+### month(year, month, w:0, l:0)
+
+Return a month’s calendar in a multi-line string.
+
+- The following keyword arguments can be used.
+  - w: it specifies the width of the date columns which are centered(default: 0).
+  - l: it specifies the number of lines that each week will use(default: 0).
+
+### year(year, w:0, l:0, c:6, m:3)
+
+Return a year’s calendar in a multi-line string.
+
+- The following keyword arguments can be used.
+  - w: it specifies the width of the date columns which are centered(default: 0).
+  - l: it specifies the number of lines that each week will use(default: 0).
+  - c: it specifies the monthly calendar interval(default: 6).
+  - m: it specifies the number of months to display on one line(default: 3).
 
 ## Contributing
 
