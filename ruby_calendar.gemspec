@@ -8,11 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["saku888"]
   spec.email         = ["sakura.orn888@gmail.com"]
 
-  spec.summary       = %q{This is a calender of gem}
-  spec.description   = %q{This gem produces a calendar output similar to the Unix cal program}
+  spec.summary       = "This is a calender of gem"
+  spec.description   = "This gem produces a calendar output similar to the Unix cal program"
   spec.homepage      = "https://github.com/saku888/ruby-calendar"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 2.4.0"
+  spec.required_ruby_version = ">= 2.5.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"] = spec.homepage

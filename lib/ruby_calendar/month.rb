@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module RubyCalendar
   module Month
-    def month(year=@year, month=@month, w:0, l:0)
+    def month(year = @year, month = @month, w: 0, l: 0)
       w = [2, w].max
       l = [1, l].max
-      s = format_month_name(month, 7*(w+1)-1)
+      s = format_month_name(year, month, 7 * (w + 1) - 1)
       s = s.rstrip
       s += "\n" * l
       s += format_week_header(w).rstrip
