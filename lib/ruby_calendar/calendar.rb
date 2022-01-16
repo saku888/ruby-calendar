@@ -12,7 +12,7 @@ module RubyCalendar
 
     WEEK_DAY_NAME = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday].freeze
 
-    def initialize(year, month = 1, firstweekday: 0)
+    def initialize(year = today_year, month = today_month, firstweekday: 0)
       @year = year
       @month = month
       @firstweekday = firstweekday
@@ -34,6 +34,14 @@ module RubyCalendar
     end
 
     private
+
+    def today_year
+      Date.today.year
+    end
+
+    def today_month
+      Date.today.month
+    end
 
     def format_month_name(year, month, width, withyear = true)
       if withyear
@@ -75,7 +83,7 @@ module RubyCalendar
       names = WEEK_DAY_NAME.rotate(@firstweekday)
       if width >= 9
         names
-      elsif width < 9
+      else
         names.map { |name| name.slice(0, [3, width].min) }
       end
     end
