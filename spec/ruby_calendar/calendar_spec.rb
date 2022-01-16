@@ -4,23 +4,29 @@ RSpec.describe RubyCalendar::Calendar do
   describe "#new" do
     let(:today) { Date.today }
 
-    context "default firstweekday" do
-      let(:calendar) { RubyCalendar::Calendar.new(today.year) }
+    context "default values" do
+      let(:calendar) { RubyCalendar::Calendar.new }
+      let(:year) { today.year }
+      let(:month) { today.month }
+
+      it { expect(calendar.year.lines.first.strip).to eq year.to_s }
+      it { expect(calendar.month.lines.first.gsub(/#{year}/, "").strip).to eq Date.new(year, month).strftime("%B") }
       it { expect(calendar.firstweekday).to eq 0 }
     end
 
     context "pass keyword argument firstweekday" do
-      let(:calendar) { RubyCalendar::Calendar.new(today.year, firstweekday: 1) }
+      let(:calendar) { RubyCalendar::Calendar.new(firstweekday: 1) }
+
       it { expect(calendar.firstweekday).to eq 1 }
     end
   end
 
   describe "#set_methods" do
-    let(:year) { Date.today.year }
+    let(:year) { Date.today.year + 1 }
     let(:calendar) { RubyCalendar::Calendar.new(year) }
 
     context "#set_year" do
-      before { calendar.set_year(2022) }
+      before { calendar.set_year(year) }
 
       it "success change year" do
         expect(calendar.year.lines.first.strip).to eq year.to_s
@@ -46,7 +52,7 @@ RSpec.describe RubyCalendar::Calendar do
     end
   end
 
-  describe "#private methos" do
+  describe "#private methods" do
     let(:today) { Date.today }
     let(:year) { 2021 }
     let(:month) { 1 }

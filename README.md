@@ -34,7 +34,12 @@ puts calendar.month
 
 ### set_year()
 
-It specifies the year for which the calendar is displayed (default: 2021).
+It specifies the year for which the calendar is displayed.
+- default values
+  - year: Date.today.year
+  - month: Date.today.month
+  - firstweekday: 0
+
 Change by giving a number to the argument.
 
 ex) 2021 -> 2022.
