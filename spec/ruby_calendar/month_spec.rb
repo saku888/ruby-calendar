@@ -2,7 +2,7 @@
 
 RSpec.describe RubyCalendar::Month do
   describe "#month" do
-    let(:calendar) { RubyCalendar::Calendar.new(2021) }
+    let(:calendar) { RubyCalendar::Calendar.new(2021, 1) }
 
     context "no argument" do
       month_calendar = <<~MONTH
